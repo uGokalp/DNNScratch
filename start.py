@@ -1,47 +1,33 @@
 import numpy as np
 
 
-def sigmoid(x):
-    """
-    Sigmoid(x) = 1 / (1 + e^-x)
-    :param x:
-    :return:
-    """
-    return 1 / (1 + np.exp(-x))
-
-
-def sigmoid_derivative(x):
-    return sigmoid(x) * (1 - sigmoid(x))
-
-
-class Dense:
-    def __init__(self, inputs, outputs):
-        self.input = inputs
-        self.output = outputs
-        self.bias = self._get_bias()
-
-    def _get_bias(self):
-        in_dim = np.ndim(self.input)
-        out_dim = np.ndim(self.output)
-        return np.random.random((in_dim, out_dim))
-
-
 class Model:
+    """
+    What it should do:
+
+    """
+
     def __init__(self, n_layers, input_size, output_size):
         self.n_layers = n_layers
         self.layers = []
         self.input_size = input_size
+        self.output_size = output_size
 
-    def agg_layers(self):
-        if len(self.layers) < 1:
-            for layer in range(self.n_layers):
-                self.layers.append(Dense)
+    def push_layer(self, new_layer):
+        self.layers.append(new_layer)
 
-    def solve_shapes(self):
+    def train(self, X_train, y_train):
+        if not self.layers:
+            pass
+        else:
+            print("Need layers fam")
+
+    def test(self, X_test, y_test):
         pass
 
-    def Dataset(self):
-        """
-        Should load data in batches
-        :return:
-        """
+
+class Dataset:
+    """
+    Should load data in batches
+    :return:
+    """
