@@ -1,13 +1,27 @@
 import numpy as np
+from activations import sigmoid
+from random import random
 
 
-class Dense:
-    def __init__(self, inputs, outputs):
-        self.input = inputs
-        self.output = outputs
-        self.bias = self._get_bias()
+class HiddenLayer:
 
-    def _get_bias(self):
-        in_dim = np.ndim(self.input)
-        out_dim = np.ndim(self.output)
-        return np.random.random((in_dim, out_dim))
+    def __init__(self, in_dim, out_dim):
+        self.in_dim = in_dim
+        self.out_dim = out_dim
+        self.init_layer()
+        self.f = {}
+
+    def init_layer(self):
+        self.weight = np.random.rand(self.in_dim, self.out_dim)
+        self.bias = np.random.rand(1, self.out_dim)
+
+    def forward(self, x):
+        if self.weight.shape[0] == x.shape[1]:
+            x = np.dot(x, self.weight) + self.bias
+            x = sigmoid(x)
+            self.f['W'] = x
+            return x
+        else:
+            x = sigmoid(np.matmul(x, self.weight) + self.bias)
+            self.f['W'] = x
+            return x

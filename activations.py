@@ -11,8 +11,28 @@ def sigmoid(x):
 
 
 def sigmoid_derivative(x):
-    return sigmoid(x) * (1 - sigmoid(x))
+    """
+    Expecting x to already have sigmoid applied
+    :param x:
+    :return:
+    """
+    return x * (1 - x)
 
 
 def relu(x):
     return np.maximum(0, x)
+
+
+##################
+#### METRICS #####
+##################
+
+
+def mse(y_true, pred):
+    error = np.square((y_true - pred)).sum() / 2 * len(y_true)
+    return error
+
+
+def accuracy(y_true, pred):
+    corrects = pred.round() == y_true
+    return corrects.mean()
