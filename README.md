@@ -9,8 +9,8 @@
 
 - [X] Logistic Regression
 - [X] Linear Regression
-- [ ] Decision Tree
-- [ ] Random Forest
+- [X] Decision Tree
+- [X] Random Forest
 - [ ] Support Vector Machine
 
 - [ ] kNN
