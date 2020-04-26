@@ -31,7 +31,7 @@ class NeuralClassification:
             for features, true in zip(X, y):
                 self.grad_input = np.zeros(self.input_w.shape)
                 self.grad_hidden = np.zeros(self.hidden_w.shape)
-                output = self.forward(features)
+                w1, output = self.forward(features)
                 self.backward(true, output, features)
                 self.history.append(self.__cross_entropy(true, output))
                 self.update_grad()
@@ -51,7 +51,7 @@ class NeuralClassification:
     def forward(self, x):
         w1 = self.__sigmoid(x.dot(self.input_w))
         output = self.__sigmoid(w1.dot(self.hidden_w))
-        return output
+        return w1, output
 
     def predict(self, x):
         x = np.array(x.values.tolist())
