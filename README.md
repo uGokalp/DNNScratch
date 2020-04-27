@@ -15,4 +15,4 @@
 
 - [ ] kNN
 - [ ] K-Means
-- [ ] PCA
+- [X] PCA
