@@ -2,6 +2,9 @@ import numpy as np
 
 
 class PCA:
+    """
+    Numpy implementation of Principal Component Analysis.
+    """
 
     def __init__(self, n_components: int, solver='svd'):
         self.n_components = n_components
@@ -10,6 +13,12 @@ class PCA:
         self.vectors = None
 
     def fit(self, X: np.ndarray):
+        """
+        Calculates the eigenvectors and eigenvalues for PCA computation.
+
+        :param X: An array of features
+        :return: None
+        """
         x = np.array(X)
         zero_mean = x - x.mean(axis=0)
 
@@ -19,6 +28,13 @@ class PCA:
             self.fit_cov(zero_mean)
 
     def fit_cov(self, X: np.ndarray):
+        """
+        Calculates the eigenvalues and eigenvectors using the covariance
+        matrix.
+
+        :param X: An array of zero mean features
+        :return: None
+        """
         cov = np.cov(X.T)  # same as (X.T @ X) / (n - 1)
 
         # Matrix Decomposition
@@ -28,26 +44,49 @@ class PCA:
         self.vectors = vectors[idx]
 
     def fit_svd(self, X: np.ndarray):
+        """
+        Calculates the eigenvalues and eigenvectors using Singular Value
+        Decomposition.
+        :param X: An array of zero mean features
+        :return: None
+        """
         U, sig, V = np.linalg.svd(X)
         self.vectors = V
         self.components = np.square(sig) / (X.shape[0] - 1)
 
     def transform(self, X: np.ndarray):
+        """
+        Projects the input data along the principal components of fitted data.
+
+        :param X: An array of features
+        :return: n by n_components matrix
+        """
         return (X - X.mean(axis=0)).dot(self.vectors.T)  # Projection
 
     def fit_transform(self, X: np.ndarray):
+        """
+        Calculates the eigenvalues and eigenvectors using supplied method.
+        Projects the input data along the principal components of fitted data.
+
+        :param X: An array of features
+        :return: n by n_components matrix
+        """
         x = np.array(X)
         zero_mean = x - x.mean()
 
         if self.solver == 'svd':
             self.fit_svd(zero_mean)
-            return self.transform(zero_mean)
-        else:
-            self.fit_cov(zero_mean)
-            return self.transform(zero_mean)
+            return self.transform(x)
+
+        self.fit_cov(zero_mean)
+        return self.transform(x)
 
     @property
     def explained_variance(self):
+        """
+        Calculates the explained variance by selecting up to the nth component.
+        :return: np.float
+        """
         return self.components[
                :self.n_components].sum() / self.components.sum()
 
