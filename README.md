@@ -19,7 +19,7 @@
 
 ### Categorical Variable Encoders
 
-- [] Label Encoder
-- [] One hot encoder
-- [] Mean Encoder
-- [] Embeddings
+- [ ] Label Encoder
+- [ ] One hot encoder
+- [ ] Mean Encoder
+- [ ] Embeddings
