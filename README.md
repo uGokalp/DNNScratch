@@ -16,3 +16,10 @@
 - [ ] kNN
 - [ ] K-Means
 - [X] PCA
+
+### Categorical Variable Encoders
+
+- [] Label Encoder
+- [] One hot encoder
+- [] Mean Encoder
+- [] Embeddings
