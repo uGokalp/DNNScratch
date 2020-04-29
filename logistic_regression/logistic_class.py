@@ -25,7 +25,7 @@ class LogisticRegression:
         for _ in tqdm(range(self.__n_iter)):
             pred = self.__sigmoid(X @ weights)
             self.history.append(self.__cross_entropy(y, pred))
-            grad = X.T @ (pred - y)
+            grad = (pred - y) @ X
             weights -= self.lr * grad / len(X)
         self.__params = weights
         print("Complete")
@@ -44,11 +44,17 @@ class LogisticRegression:
 
 if __name__ == '__main__':
     import pandas as pd
+    import matplotlib.pyplot as plt
 
     data = pd.read_csv("data/scaled.csv")
     from sklearn.model_selection import train_test_split
+    from sklearn.metrics import classification_report
 
     X_train, X_test, y_train, y_test = train_test_split(
         data.drop("species", axis=1), data.species)
     clf = LogisticRegression()
     clf.fit(X_train, y_train)
+    p = clf.predict(X_test)
+    print(classification_report(y_test, p))
+    plt.plot(clf.history)
+    plt.show()

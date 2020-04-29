@@ -13,13 +13,13 @@
 - [X] Random Forest
 - [ ] Support Vector Machine
 
-- [ ] kNN
+- [X] kNN
 - [ ] K-Means
 - [X] PCA
 
 ### Categorical Variable Encoders
 
-- [ ] Label Encoder
-- [ ] One hot encoder
-- [ ] Mean Encoder
+- [X] Label Encoder
+- [X] One hot encoder
+- [X] Mean Encoder
 - [ ] Embeddings
