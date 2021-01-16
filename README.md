@@ -3,7 +3,6 @@
 ### List of algorithms
 
 - [X] Neural Network
-- [X] Deep Neural Network
 - [ ] Convolutional Neural Network
 - [ ] Recurrent Neural Network
 
